@@ -15,10 +15,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../cabecera.html" />
+    <jsp:include page="../cabecera.html" />
+    <form name="info_curso" action="servlet_info_curso">
         <table border="1" width="100%">
             <tr>
-               <th>Nombre</th>
+               <th>Curso</th>
                <th>Duracion</th>
                <th>Precio</th>
             </tr>
@@ -33,11 +34,12 @@
                <td><%= curso.getNombre() %></td>
                <td><%= curso.getDuracion() %></td>
                <td><%= curso.getPrecio() %></td>
-               <td width="50"><input type="submit" value="Agregar" name="agregar" /></td>
+               <td width="50"><input type="submit" value="Entrar" name="entrar" /></td>
             </tr>
             <% } %>
                 
         </table>
-            <jsp:include page="../pie.html" />
+    </form>
+    <jsp:include page="../pie.html" />
     </body>
 </html>

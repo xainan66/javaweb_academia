@@ -7,6 +7,7 @@ package dao;
 import java.util.List;
 import modelo.Usuario;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -76,11 +77,45 @@ public class UsuarioDao {
         return p;
     }
     
+    public Usuario obtenerUno(String nombre) throws HibernateException{
+         Usuario u = null;
+         try {
+            sesion = HibernateUtil.getSFactory().openSession();
+            Query query =sesion.createQuery("from Usuario where nombre = '"+nombre+"'");
+            query.setMaxResults(1);
+            u = (Usuario) query.uniqueResult();
+        } catch (HibernateException he) {
+            throw new HibernateException("Error en el DAO");
+        } finally {
+            sesion.close();
+        }
+        return u;
+    }
+    
+    public boolean validarUsuario(String nombre, String passwd) throws HibernateException{
+         Usuario u = null;
+         boolean resultado = false;
+         try {
+            sesion = HibernateUtil.getSFactory().openSession();
+            Query query =sesion.createQuery("from Usuario where nombre = '"+nombre+"' and passwd = '"+passwd+"'");
+            query.setMaxResults(1);
+            u = (Usuario) query.uniqueResult();
+            if((u!=null) && (u.getNombre().equals(nombre) && u.getPasswd().equals(passwd))){
+                resultado = true;
+            }
+        } catch (HibernateException he) {
+            throw new HibernateException("Error en el DAO");
+        } finally {
+            sesion.close();
+        }
+        return resultado;
+    }
+    
     public List<Usuario> obtenerTodos() throws HibernateException{
          List<Usuario> lista;
          try {
             sesion = HibernateUtil.getSFactory().openSession();
-            lista=sesion.createQuery("from Usuarios").list();
+            lista=sesion.createQuery("from Usuario").list();
         } catch (HibernateException he) {
             throw new HibernateException("Error en el DAO");
         } finally {

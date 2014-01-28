@@ -12,9 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form name="login" action="servlet_login" method="POST">
-            <input type="text" name="Usuario" value="" size="20" /><br>
-            <input type="password" name="Clave" value="" size="20" />
+        <form name="login" action="../servlet_login" method="POST">
+            <input type="text" name="nombre" value="" size="20" /><br>
+            <input type="password" name="clave" value="" size="20" /><br>
+            <input type="submit" value="Enviar" name="enviar" />
         </form>
     </body>
 </html>

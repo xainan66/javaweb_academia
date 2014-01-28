@@ -7,15 +7,17 @@
 package servlets;
 
 import dao.CursoDao;
+import dao.UsuarioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Curso;
+import modelo.Usuario;
 
 /**
  *
@@ -35,16 +37,28 @@ public class servlet_login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Curso curso;
-        CursoDao cdao = new CursoDao();
-        List<Curso> listaCursos = cdao.obtenerTodosPublicos();
-        for(int i=0;i<listaCursos.size();i++) {
-            curso = listaCursos.get(i);
+        HttpSession session = request.getSession(true);
+        RequestDispatcher rd;
+        UsuarioDao udao = new UsuarioDao();
+        String nombre = request.getParameter("nombre");
+        String clave = request.getParameter("clave");
+        if(udao.validarUsuario(nombre, clave)) {
+            Curso curso;
+            Usuario usuario = udao.obtenerUno(nombre);
+            CursoDao cdao = new CursoDao();
+            List<Curso> listaCursos = cdao.obtenerTodosPublicos();
+            for(int i=0;i<listaCursos.size();i++) {
+                curso = listaCursos.get(i);
+            }
+            request.setAttribute("listaCursos",listaCursos);
+            session.setAttribute("usuario", usuario);
+            rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("msg", "ERROR: Campos en blanco");
+            rd = request.getRequestDispatcher("vista/error.jsp");
+            rd.forward(request, response);
         }
-        request.setAttribute("listaCursos",listaCursos);
-        RequestDispatcher rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
-        rd.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
