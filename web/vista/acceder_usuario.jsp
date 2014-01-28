@@ -30,7 +30,7 @@
                 curso = listaCursos.get(i);
                 %>
             <tr>
-               <td style="display:none"><input type="hidden" name="idProducto" value="<%= curso.getId() %>" /></td>
+               <td style="display:none"><input type="hidden" name="idCurso" value="<%= curso.getId() %>" /></td>
                <td><%= curso.getNombre() %></td>
                <td><%= curso.getDuracion() %></td>
                <td><%= curso.getPrecio() %></td>

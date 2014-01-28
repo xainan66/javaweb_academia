@@ -12,10 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="../cabecera.html" />
         <form name="login" action="../servlet_login" method="POST">
             <input type="text" name="nombre" value="" size="20" /><br>
             <input type="password" name="clave" value="" size="20" /><br>
             <input type="submit" value="Enviar" name="enviar" />
         </form>
+        <jsp:include page="../pie.html" />
     </body>
 </html>
