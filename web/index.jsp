@@ -12,8 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="acceder.jsp">Acceder</a>
-        <a href="login.jsp">Login</a>
-        <a href="registro.jsp">Registro</a>
+        <jsp:include page="cabecera.html" />
+        <!--<a href="vista/acceder.jsp">Acceder</a><br>-->
+        <a href="servlet_acceder">Acceder</a><br>
+        <a href="vista/login.jsp">Login</a><br>
+        <a href="vista/registro.jsp">Registro</a>
     </body>
 </html>

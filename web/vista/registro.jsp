@@ -1,6 +1,6 @@
 <%-- 
-    Document   : acceder
-    Created on : 28-ene-2014, 9:26:44
+    Document   : registro
+    Created on : 28-ene-2014, 9:58:48
     Author     : postal
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>

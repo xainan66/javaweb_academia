@@ -88,6 +88,19 @@ public class CursoDao {
         }
         return lista;
     }
+    
+        public List<Curso> obtenerTodosPublicos() throws HibernateException{
+         List<Curso> lista;
+         try {
+            sesion = HibernateUtil.getSFactory().openSession();
+            lista=sesion.createQuery("from Curso where publico = true").list();
+        } catch (HibernateException he) {
+            throw new HibernateException("Error en el DAO");
+        } finally {
+            sesion.close();
+        }
+        return lista;
+    }
 
     public boolean existe(Curso curso) {
         boolean retorno = false;
