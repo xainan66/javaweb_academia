@@ -7,12 +7,15 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,17 +32,20 @@ public class Usuario implements Serializable {
     private String usuario;
     private String passwd;
     private String correo;
-    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-    private Curso curso;
+    @ManyToMany
+    @JoinTable(name = "Usuarios_Cursos", joinColumns = @JoinColumn(name = "idUsuario"),inverseJoinColumns = @JoinColumn(name = "idCurso"))
+    private List<Curso> cursos;
     
-    public Usuario() {}
+    public Usuario() {
+        this.cursos =new ArrayList<Curso>();
+    }
     
-    public Usuario(String nombre, String usuario, String passwd, String correo, Curso curso) {
+    public Usuario(String nombre, String usuario, String passwd, String correo) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.passwd = passwd;
         this.correo = correo;
-        this.curso = curso;
+        this.cursos =new ArrayList<Curso>();
     }
 
     public long getId() {
@@ -80,5 +86,17 @@ public class Usuario implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+    
+    public void addCurso(Curso c){
+        this.cursos.add(c);
     }
 }
