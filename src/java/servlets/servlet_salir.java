@@ -6,22 +6,19 @@
 
 package servlets;
 
-import dao.CursoDao;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.Curso;
 
 /**
  *
  * @author postal
  */
-public class servlet_acceder extends HttpServlet {
+public class servlet_salir extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,29 +32,13 @@ public class servlet_acceder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /* TODO output your page here. You may use following sample code. */
         HttpSession htSession = request.getSession();
-        Curso curso;
-        CursoDao cdao = new CursoDao();
-        if(htSession.getAttribute("usuario") != null) {
-            List<Curso> listaCursos = cdao.obtenerTodos();
-            for(int i=0;i<listaCursos.size();i++) {
-                curso = listaCursos.get(i);
-            }
-            request.setAttribute("listaCursos",listaCursos);
-            RequestDispatcher rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
-            rd.forward(request, response);
-        } else {
-            List<Curso> listaCursos = cdao.obtenerTodosPublicos();
-            for(int i=0;i<listaCursos.size();i++) {
-                curso = listaCursos.get(i);
-            }
-            request.setAttribute("listaCursos",listaCursos);
-            RequestDispatcher rd = request.getRequestDispatcher("vista/acceder_invitado.jsp");
+        RequestDispatcher rd;
+        if(htSession != null) {
+            htSession.invalidate();
+            rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

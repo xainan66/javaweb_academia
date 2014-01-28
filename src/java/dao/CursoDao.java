@@ -80,7 +80,7 @@ public class CursoDao {
          List<Curso> lista;
          try {
             sesion = HibernateUtil.getSFactory().openSession();
-            lista=sesion.createQuery("from Cursos").list();
+            lista=sesion.createQuery("from Curso").list();
         } catch (HibernateException he) {
             throw new HibernateException("Error en el DAO");
         } finally {

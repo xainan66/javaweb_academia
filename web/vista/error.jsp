@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 28-ene-2014, 9:17:37
+    Document   : error
+    Created on : 28-ene-2014, 13:24:13
     Author     : postal
 --%>
 
@@ -12,9 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="cabecera.jsp" />
-        <a href="servlet_acceder">Acceder</a><br>
-        <a href="vista/login.jsp">Login</a><br>
-        <a href="vista/registro.jsp">Registro</a>
+        <jsp:include page="../cabecera.jsp" />
+        <%= request.getAttribute("msg") %>
+        <jsp:include page="../pie.html" />
     </body>
 </html>

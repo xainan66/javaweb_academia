@@ -8,9 +8,13 @@
         <servlet-name>servlet_login</servlet-name>
         <servlet-class>servlets.servlet_login</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>servlet_info_curso</servlet-name>
         <servlet-class>servlets.servlet_info_curso</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_salir</servlet-name>
+        <servlet-class>servlets.servlet_salir</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>servlet_acceder</servlet-name>
@@ -20,9 +24,13 @@
         <servlet-name>servlet_login</servlet-name>
         <url-pattern>/servlet_login</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>servlet_info_curso</servlet-name>
         <url-pattern>/servlet_info_curso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_salir</servlet-name>
+        <url-pattern>/servlet_salir</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

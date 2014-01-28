@@ -46,7 +46,7 @@ public class servlet_login extends HttpServlet {
             Curso curso;
             Usuario usuario = udao.obtenerUno(nombre);
             CursoDao cdao = new CursoDao();
-            List<Curso> listaCursos = cdao.obtenerTodosPublicos();
+            List<Curso> listaCursos = cdao.obtenerTodos();
             for(int i=0;i<listaCursos.size();i++) {
                 curso = listaCursos.get(i);
             }
@@ -55,7 +55,7 @@ public class servlet_login extends HttpServlet {
             rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
             rd.forward(request, response);
         } else {
-            request.setAttribute("msg", "ERROR: Campos en blanco");
+            request.setAttribute("msg", "ERROR: usuario o clave incorrectos");
             rd = request.getRequestDispatcher("vista/error.jsp");
             rd.forward(request, response);
         }
