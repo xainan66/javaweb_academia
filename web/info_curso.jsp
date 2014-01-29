@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../cabecera.jsp" />
+        <jsp:include page="cabecera.jsp" />
         <% Curso curso = (Curso)request.getAttribute("curso");
             String nombre = curso.getNombre();
             int duracion = curso.getDuracion();
@@ -23,6 +23,6 @@
         <div>Duracion: </div><%= duracion %>
         <div>Precio: </div><%= precio %>
         <div><a href="servlet_acceder">Volver</a></div>
-        <jsp:include page="../pie.html" />
+        <jsp:include page="pie.html" />
     </body>
 </html>

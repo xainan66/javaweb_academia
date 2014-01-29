@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../cabecera.jsp" />
+        <jsp:include page="cabecera.jsp" />
         <table border="1" width="100%">
             <tr>
                <th>Curso</th>
@@ -37,6 +37,6 @@
             <% } %>
                 
         </table>
-            <jsp:include page="../pie.html" />
+            <jsp:include page="pie.html" />
     </body>
 </html>

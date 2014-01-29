@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 28-ene-2014, 9:17:37
+    Document   : bienvenida
+    Created on : 29-ene-2014, 9:46:42
     Author     : postal
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="cabecera.jsp" />
-        <a href="servlet_acceder">Acceder</a><br>
-        <a href="login.jsp">Login</a><br>
-        <a href="registro.jsp">Registro</a>
+        <h1>welcome</h1>
     </body>
 </html>

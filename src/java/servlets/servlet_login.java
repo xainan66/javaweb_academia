@@ -40,18 +40,18 @@ public class servlet_login extends HttpServlet {
         HttpSession session = request.getSession(true);
         RequestDispatcher rd;
         UsuarioDao udao = new UsuarioDao();
-        String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");
-        if(udao.validarUsuario(usuario, clave)) {
+        String nUsuario = (String)request.getParameter("usuario");
+        String clave = (String)request.getParameter("clave");
+        if(udao.validarUsuario(nUsuario, clave)) {
             Curso curso;
-            Usuario login = udao.obtenerUno(usuario);
+            Usuario login = udao.obtenerUno(nUsuario);
             CursoDao cdao = new CursoDao();
             List<Curso> listaCursos = cdao.obtenerTodos();
             for(int i=0;i<listaCursos.size();i++) {
                 curso = listaCursos.get(i);
             }
             request.setAttribute("listaCursos",listaCursos);
-            session.setAttribute("usuario", usuario);
+            session.setAttribute("usuario", nUsuario);
             rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
             rd.forward(request, response);
         } else {

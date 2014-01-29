@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <jsp:include page="../cabecera.jsp" />
+    <jsp:include page="cabecera.jsp" />
     <form name="info_curso" action="servlet_info_curso">
         <table border="1" width="100%">
             <tr>
@@ -40,6 +40,6 @@
                 
         </table>
     </form>
-    <jsp:include page="../pie.html" />
+    <jsp:include page="pie.html" />
     </body>
 </html>

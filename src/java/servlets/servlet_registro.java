@@ -39,7 +39,7 @@ public class servlet_registro extends HttpServlet {
         String clave = (String)request.getParameter("clave");
         String usuario = (String)request.getParameter("usuario");
         String correo = (String)request.getParameter("correo");
-        Usuario registro = new Usuario(nombre, clave, usuario, correo);
+        Usuario registro = new Usuario(nombre, usuario, clave, correo);
         UsuarioDao udao = new UsuarioDao();
         if(!udao.existe(registro)) {
             long res = udao.guardar(registro);
