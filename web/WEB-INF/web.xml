@@ -16,6 +16,10 @@
         <servlet-name>servlet_salir</servlet-name>
         <servlet-class>servlets.servlet_salir</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servlet_registro</servlet-name>
+        <servlet-class>servlets.servlet_registro</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servlet_acceder</servlet-name>
         <url-pattern>/servlet_acceder</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>servlet_salir</servlet-name>
         <url-pattern>/servlet_salir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_registro</servlet-name>
+        <url-pattern>/servlet_registro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

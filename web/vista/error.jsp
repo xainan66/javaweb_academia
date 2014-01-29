@@ -13,7 +13,7 @@
     </head>
     <body>
         <jsp:include page="../cabecera.jsp" />
-        <%= request.getAttribute("msg") %>
+        <h3>ERROR: </h3><%= request.getAttribute("msg") %>
         <jsp:include page="../pie.html" />
     </body>
 </html>

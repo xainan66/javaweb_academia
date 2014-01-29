@@ -25,7 +25,7 @@ public class UsuarioDao {
         try {
             sesion = HibernateUtil.getSFactory().openSession();
             transaccion = sesion.beginTransaction();
-            id = (long) sesion.save(p);
+            id = (Long) sesion.save(p);
             transaccion.commit();
         } catch (HibernateException he) {
             transaccion.rollback();
@@ -77,11 +77,11 @@ public class UsuarioDao {
         return p;
     }
     
-    public Usuario obtenerUno(String nombre) throws HibernateException{
+    public Usuario obtenerUno(String usuario) throws HibernateException{
          Usuario u = null;
          try {
             sesion = HibernateUtil.getSFactory().openSession();
-            Query query =sesion.createQuery("from Usuario where nombre = '"+nombre+"'");
+            Query query =sesion.createQuery("from Usuario where usuario = '"+usuario+"'");
             query.setMaxResults(1);
             u = (Usuario) query.uniqueResult();
         } catch (HibernateException he) {
@@ -92,15 +92,15 @@ public class UsuarioDao {
         return u;
     }
     
-    public boolean validarUsuario(String nombre, String passwd) throws HibernateException{
+    public boolean validarUsuario(String usuario, String passwd) throws HibernateException{
          Usuario u = null;
          boolean resultado = false;
          try {
             sesion = HibernateUtil.getSFactory().openSession();
-            Query query =sesion.createQuery("from Usuario where nombre = '"+nombre+"' and passwd = '"+passwd+"'");
+            Query query =sesion.createQuery("from Usuario where usuario = '"+usuario+"' and passwd = '"+passwd+"'");
             query.setMaxResults(1);
             u = (Usuario) query.uniqueResult();
-            if((u!=null) && (u.getNombre().equals(nombre) && u.getPasswd().equals(passwd))){
+            if((u!=null) && (u.getUsuario().equals(usuario) && u.getPasswd().equals(passwd))){
                 resultado = true;
             }
         } catch (HibernateException he) {
@@ -126,17 +126,12 @@ public class UsuarioDao {
 
     public boolean existe(Usuario usuario) {
         boolean retorno = false;
-        Object resultado;
         try {
             sesion = HibernateUtil.getSFactory().openSession();
-            List<Usuario> lista = sesion.createQuery("from Usuario where nombre ='"+usuario.getNombre()+"'").list();
-            Usuario usuarioBD = lista.get(0);
-            if(usuarioBD!=null) {
-                long id = usuarioBD.getId();
-                resultado = sesion.get(Usuario.class, id);
-                if(resultado!=null) {
-                    retorno = true;
-                }
+            Query query = sesion.createQuery("from Usuario where usuario ='"+usuario.getUsuario()+"'");
+            List<Usuario> lista = query.list();
+            if(!lista.isEmpty()) {
+                retorno = true;
             }
         } catch (HibernateException he) {
             throw new HibernateException("Error en el DAO");

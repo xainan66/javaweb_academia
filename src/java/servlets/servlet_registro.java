@@ -6,24 +6,21 @@
 
 package servlets;
 
-import dao.CursoDao;
 import dao.UsuarioDao;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.Curso;
 import modelo.Usuario;
 
 /**
  *
  * @author postal
  */
-public class servlet_login extends HttpServlet {
+public class servlet_registro extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,26 +34,28 @@ public class servlet_login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
         RequestDispatcher rd;
+        String nombre = (String)request.getParameter("nombre");
+        String clave = (String)request.getParameter("clave");
+        String usuario = (String)request.getParameter("usuario");
+        String correo = (String)request.getParameter("correo");
+        Usuario registro = new Usuario(nombre, clave, usuario, correo);
         UsuarioDao udao = new UsuarioDao();
-        String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");
-        if(udao.validarUsuario(usuario, clave)) {
-            Curso curso;
-            Usuario login = udao.obtenerUno(usuario);
-            CursoDao cdao = new CursoDao();
-            List<Curso> listaCursos = cdao.obtenerTodos();
-            for(int i=0;i<listaCursos.size();i++) {
-                curso = listaCursos.get(i);
+        if(!udao.existe(registro)) {
+            long res = udao.guardar(registro);
+            if(res>0) {
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", registro);
+                rd = request.getRequestDispatcher("/javaweb_academia/vista/bienvenida.jsp");
+                rd.forward(request, response);
+            } else {
+                request.setAttribute("msg", "Error en la BD al registrar el usuario");
+                rd = request.getRequestDispatcher("/javaweb_academia/vista/error.jsp");
+                rd.forward(request, response);
             }
-            request.setAttribute("listaCursos",listaCursos);
-            session.setAttribute("usuario", usuario);
-            rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
-            rd.forward(request, response);
         } else {
-            request.setAttribute("msg", "Usuario o clave incorrectos");
-            rd = request.getRequestDispatcher("vista/error.jsp");
+            request.setAttribute("msg", "El usuario ya existe");
+            rd = request.getRequestDispatcher("/javaweb_academia/vista/error.jsp");
             rd.forward(request, response);
         }
     }
