@@ -20,6 +20,10 @@
         <servlet-name>servlet_registro</servlet-name>
         <servlet-class>servlets.servlet_registro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servlet_matricula</servlet-name>
+        <servlet-class>servlets.servlet_matricula</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servlet_acceder</servlet-name>
         <url-pattern>/servlet_acceder</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>servlet_registro</servlet-name>
         <url-pattern>/servlet_registro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_matricula</servlet-name>
+        <url-pattern>/servlet_matricula</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

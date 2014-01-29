@@ -22,6 +22,10 @@
         <div>Curso: </div><%= nombre %>
         <div>Duracion: </div><%= duracion %>
         <div>Precio: </div><%= precio %>
+        <form name="matricula" action="servlet_matricula">
+            <input type="hidden" name="idCurso" value="<%= curso.getId() %>" />
+            <input type="submit" value="Matricular" name="enviar" />
+        </form>
         <div><a href="servlet_acceder">Volver</a></div>
         <jsp:include page="pie.html" />
     </body>

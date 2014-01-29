@@ -6,6 +6,7 @@
 
 package servlets;
 
+import dao.CursoDao;
 import dao.UsuarioDao;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -14,13 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Curso;
 import modelo.Usuario;
 
 /**
  *
  * @author postal
  */
-public class servlet_registro extends HttpServlet {
+public class servlet_matricula extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,31 +36,19 @@ public class servlet_registro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         RequestDispatcher rd;
-        String nombre = (String)request.getParameter("nombre");
-        String clave = (String)request.getParameter("clave");
-        String usuario = (String)request.getParameter("usuario");
-        String correo = (String)request.getParameter("correo");
-        Usuario registro = new Usuario(nombre, usuario, clave, correo);
+        CursoDao cdao = new CursoDao();
         UsuarioDao udao = new UsuarioDao();
-        if(!udao.existe(registro)) {
-            long res = udao.guardar(registro);
-            if(res>0) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", registro);
-                rd = request.getRequestDispatcher("bienvenida.jsp");
-                rd.forward(request, response);
-            } else {
-                request.setAttribute("msg", "Error en la BD al registrar el usuario");
-                rd = request.getRequestDispatcher("error.jsp");
-                rd.forward(request, response);
-            }
-        } else {
-            request.setAttribute("msg", "El usuario ya existe");
-            rd = request.getRequestDispatcher("error.jsp");
-            rd.forward(request, response);
-        }
-    }
+        long idCurso = Long.parseLong(request.getParameter("idCurso"));
+        Curso curso = cdao.obtenerUno(idCurso);
+        Usuario usuario = (Usuario)session.getAttribute("usuario");
+        usuario.addCurso(curso);
+        udao.actualizar(usuario);
+        request.setAttribute("curso",curso.getNombre());
+        rd = request.getRequestDispatcher("matricula.jsp");
+        rd.forward(request, response);
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

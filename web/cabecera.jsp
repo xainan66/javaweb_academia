@@ -16,8 +16,8 @@
         <h1>ACADEMIA LOGOS</h1>
         <% HttpSession htsession = request.getSession(true);
         if(session.getAttribute("usuario")!=null) {
-            String usuario = (String)session.getAttribute("usuario");%>
-            <h3>Bienvenido <%= usuario %> <span><a href="servlet_salir">(Salir)</a></span></h3>
+            Usuario usuario = (Usuario)session.getAttribute("usuario");%>
+            <h3>Bienvenido <%= usuario.getNombre() %> <span><a href="servlet_salir">(Salir)</a></span></h3>
         <% } %>
     </body>
 </html>

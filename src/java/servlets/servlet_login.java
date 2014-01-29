@@ -51,12 +51,12 @@ public class servlet_login extends HttpServlet {
                 curso = listaCursos.get(i);
             }
             request.setAttribute("listaCursos",listaCursos);
-            session.setAttribute("usuario", nUsuario);
-            rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
+            session.setAttribute("usuario", login);
+            rd = request.getRequestDispatcher("acceder_usuario.jsp");
             rd.forward(request, response);
         } else {
             request.setAttribute("msg", "Usuario o clave incorrectos");
-            rd = request.getRequestDispatcher("vista/error.jsp");
+            rd = request.getRequestDispatcher("error.jsp");
             rd.forward(request, response);
         }
     }

@@ -13,8 +13,12 @@
     </head>
     <body>
         <jsp:include page="cabecera.jsp" />
+
         <a href="servlet_acceder">Acceder</a><br>
+        <% HttpSession htsession = request.getSession(true);
+        if(session.getAttribute("usuario")==null) { %>
         <a href="login.jsp">Login</a><br>
         <a href="registro.jsp">Registro</a>
+        <% } %>
     </body>
 </html>

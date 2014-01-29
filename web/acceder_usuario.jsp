@@ -16,7 +16,6 @@
     </head>
     <body>
     <jsp:include page="cabecera.jsp" />
-    <form name="info_curso" action="servlet_info_curso">
         <table border="1" width="100%">
             <tr>
                <th>Curso</th>
@@ -30,16 +29,13 @@
                 curso = listaCursos.get(i);
                 %>
             <tr>
-               <td style="display:none"><input type="hidden" name="idCurso" value="<%= curso.getId() %>" /></td>
-               <td><%= curso.getNombre() %></td>
+               <td><a href="servlet_info_curso?idCurso=<%= curso.getId() %>"><%= curso.getNombre() %></a></td>
                <td><%= curso.getDuracion() %></td>
                <td><%= curso.getPrecio() %></td>
-               <td width="50"><input type="submit" value="Entrar" name="entrar" /></td>
             </tr>
             <% } %>
                 
         </table>
-    </form>
     <jsp:include page="pie.html" />
     </body>
 </html>

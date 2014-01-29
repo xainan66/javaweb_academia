@@ -1,6 +1,6 @@
 <%-- 
-    Document   : bienvenida
-    Created on : 29-ene-2014, 9:46:42
+    Document   : matricula
+    Created on : 29-ene-2014, 11:35:45
     Author     : postal
 --%>
 
@@ -14,10 +14,10 @@
     </head>
     <body>
         <jsp:include page="cabecera.jsp" />
-        <% HttpSession sesion = request.getSession();
-            String usuario = (String)sesion.getAttribute("usuario"); %>
-            <div>Bienvenido <%= usuario %></div>
-            
-        <jsp:include page="pie.html" />
+        <% 
+            String usuario = (String)session.getAttribute("usuario");
+            String curso = (String)request.getAttribute("curso"); %>
+            <h5>El usuario <%= usuario %> se ha matriculado en el curso <%= curso %></h5>
+            <jsp:include page="pie.html" />
     </body>
 </html>

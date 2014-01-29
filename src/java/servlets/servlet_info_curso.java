@@ -8,7 +8,6 @@ package servlets;
 
 import dao.CursoDao;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +39,7 @@ public class servlet_info_curso extends HttpServlet {
         CursoDao cdao = new CursoDao();
         curso = cdao.obtenerUno(id);
         request.setAttribute("curso",curso);
-        RequestDispatcher rd = request.getRequestDispatcher("vista/info_curso.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("info_curso.jsp");
         rd.forward(request, response);
     }
 

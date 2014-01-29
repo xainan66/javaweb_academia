@@ -45,7 +45,7 @@ public class servlet_acceder extends HttpServlet {
                 curso = listaCursos.get(i);
             }
             request.setAttribute("listaCursos",listaCursos);
-            RequestDispatcher rd = request.getRequestDispatcher("vista/acceder_usuario.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("acceder_usuario.jsp");
             rd.forward(request, response);
         } else {
             List<Curso> listaCursos = cdao.obtenerTodosPublicos();
@@ -53,7 +53,7 @@ public class servlet_acceder extends HttpServlet {
                 curso = listaCursos.get(i);
             }
             request.setAttribute("listaCursos",listaCursos);
-            RequestDispatcher rd = request.getRequestDispatcher("vista/acceder_invitado.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("acceder_invitado.jsp");
             rd.forward(request, response);
         }
 
