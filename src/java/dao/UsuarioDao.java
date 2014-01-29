@@ -81,7 +81,7 @@ public class UsuarioDao {
          Usuario u = null;
          try {
             sesion = HibernateUtil.getSFactory().openSession();
-            Query query =sesion.createQuery("from Usuario where usuario = '"+usuario+"'");
+            Query query =sesion.createQuery("from Usuario u left join fetch u.cursos where u.usuario = '"+usuario+"'");
             query.setMaxResults(1);
             u = (Usuario) query.uniqueResult();
         } catch (HibernateException he) {

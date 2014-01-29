@@ -15,9 +15,9 @@
     <body>
         <jsp:include page="cabecera.jsp" />
         <% 
-            String usuario = (String)session.getAttribute("usuario");
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
             String curso = (String)request.getAttribute("curso"); %>
-            <h5>El usuario <%= usuario %> se ha matriculado en el curso <%= curso %></h5>
+            <h4>El usuario <%= usuario.getNombre() %> se ha matriculado en el curso <%= curso %></h4>
             <jsp:include page="pie.html" />
     </body>
 </html>
